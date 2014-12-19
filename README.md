@@ -24,7 +24,7 @@ Usage
 #### opencpu::default
 Sets up the system pre-requisites for opencpu per the ppa offered by core opencpu developer, Jeroen Ooms
 
-#### opencpu::nginx
+#### opencpu::cache
 Installs nginx as a reverse proxy/caching engine configured for apache/RApache/opencpu. Done again via the provided ppa.
 
 License and Authors
