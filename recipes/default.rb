@@ -18,19 +18,37 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-case node['lsb']['codename']
-when "trusty"
- apt_repository 'opencpu-1.4' do
-  uri          'ppa:opencpu/opencpu-1.4'
-  distribution node['lsb']['codename']
- end
+#almost all users will want the stable release, but add support for legacy release as well.
+case node['opencpu']['release']
+when "stable"
 
- package 'opencpu' do
-  action :install
- end
+ #opencpu-1.4 ppa tested as working only on 14.04
+ case node['lsb']['codename']
+ when "trusty"
+  apt_repository 'opencpu-1.4' do
+   uri          'ppa:opencpu/opencpu-1.4'
+   distribution node['lsb']['codename']
+  end
+ 
+  package 'opencpu' do
+   action :install
+  end
+ 
+  service 'opencpu' do
+   action [:start, :enable]
+   supports :restart => true
+  end
 
- service 'opencpu' do
-  action [:start, :enable]
-  supports :restart => true
- end
+when "legacy"
+ #ohmage-2.13 ppa wont work newer than on 12.04
+ case node['lsb']['codename']
+ when "trusty"
+  apt_repository 'ohmage-2.13' do
+   uri 'ppa:opencpu/ohmage-2.13'
+   distribution node['lsb']['codename']
+  end
+
+  package 'ohmage-viz'
+   action :install
+  end
 end

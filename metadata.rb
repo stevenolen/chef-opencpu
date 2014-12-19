@@ -4,10 +4,11 @@ maintainer_email 'technolengy@gmail.com'
 license          'Apache 2.0'
 description      'Installs/Configures opencpu'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          '0.1.0'
+version          '0.2.0'
 
 depends 'apt'
 
+supports 'ubuntu', '= 12.04'
 supports 'ubuntu', '= 14.04'
 
 recipe 'opencpu::default', 'Install and configures opencpu server from jeroenooms ppa'

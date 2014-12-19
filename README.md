@@ -1,6 +1,8 @@
 opencpu Cookbook
 ===============
-Installs and configures the opencpu project via previously offered PPA. 
+Installs and configures the opencpu project via previously offered PPA. Tested as working only on Ubuntu 14.04 
+
+Now supports installation of the legacy pre-1.0 opencpu packages. In general, this can be completely ignored, but if you know you want these packages, please ensure that your OS is Ubuntu 12.04.
 
 TODO: break this apart into individual component cookbook install method. 
 
@@ -8,12 +10,14 @@ Requirements
 ------------
 ### Platforms
 - Ubuntu 14.04
+- Ubuntu 12.04
 
 ### Dependencies
 - apt
 
 Attributes
 ----------
+*  `default['opencpu']['release']` - The release of opencpu to install. one of `["stable", "legacy"]`, but in general leave as default: `stable`.
 
 Usage
 -----
