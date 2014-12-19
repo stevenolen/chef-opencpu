@@ -25,8 +25,7 @@ case node['opencpu']['release']
 when "stable"
 
  #opencpu-1.4 ppa tested as working only on 14.04
- case node['lsb']['codename']
- when "trusty"
+ if node['lsb']['codename'] == "trusty"
   apt_repository 'opencpu-1.4' do
    uri          'ppa:opencpu/opencpu-1.4'
    distribution node['lsb']['codename']
@@ -38,17 +37,17 @@ when "stable"
    action [:start, :enable]
    supports :restart => true
   end
+ end
 
 when "legacy"
  
  #ohmage-2.13 ppa wont work newer than on 12.04
- case node['lsb']['codename']
- when "trusty"
+ if node['lsb']['codename'] == "precise"
   apt_repository 'ohmage-2.13' do
    uri 'ppa:opencpu/ohmage-2.13'
    distribution node['lsb']['codename']
   end
-  package 'ohmage-viz'
+  package 'ohmage-viz' do
    action :install
   end
   service 'opencpu-server' do
